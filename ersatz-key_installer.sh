@@ -27,7 +27,7 @@ cryptsetup luksOpen --key-file="${key_file}" "${encrypted_partition}" "${cryptro
 uuid_crypttab="$(blkid -o udev "${encrypted_partition}" | grep 'ID_FS_UUID=' | awk -F= '{print $2}')"
 uuid_fstab="$(blkid -o udev "${cryptroot_path}" | grep 'ID_FS_UUID=' | awk -F= '{print $2}')"
 
-printf "%s\tUUID=%s\t%s\t%s\n" usb-luks "${uuid_crypttab}" "${key_file}" luks >> /etc/crypttab
+printf "\n%s\tUUID=%s\t%s\t%s\n" usb-luks "${uuid_crypttab}" "${key_file}" luks >> /etc/crypttab
 
 printf "\n" >> /etc/fstab
 echo "# ${cryptroot_path}" >> /etc/fstab
