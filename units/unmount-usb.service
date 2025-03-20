@@ -1,0 +1,13 @@
+[Unit]
+Description=Unmount usb once unsealing is complete
+Requires=unseal-usb.target
+After=unseal-usb.target
+
+[Service]
+Type=oneshot
+Restart=on-failure
+TimeoutStopSec=10
+ExecStart=/usr/local/bin/ersatz-key/unmount-and-seal.sh /usb usb-luks
+
+[Install]
+WantedBy=multi-user.target
