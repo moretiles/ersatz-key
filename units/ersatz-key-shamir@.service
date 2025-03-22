@@ -2,15 +2,13 @@
 Description=Unseal keepass password (%I)
 Requires=cryptsetup.target local-fs.target
 After=cryptsetup.target local-fs.target
-PartOf=unseal-usb.target
+PartOf=unseal-usb@%i.target
 
 [Service]
 Type=oneshot
 Restart=on-failure
 TimeoutStopSec=10
-ExecStart=/usr/local/bin/ersatz-key/keepass/shamir-keepass-decrypt.sh %I
-User=dv
-Group=dv
+ExecStart=/usr/local/bin/ersatz-key/keepass/shamir-keepass-decrypt.sh /etc/ersatz-key/%I.cfg
 
 [Install]
-WantedBy=unseal-usb.target
+WantedBy=unseal-usb@%i.target
